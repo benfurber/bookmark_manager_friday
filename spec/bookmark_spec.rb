@@ -46,7 +46,7 @@ describe Bookmark do
       new_bookmark = Bookmark.add(bbc_name, bbc_url)
       bookmark_id = Bookmark.all[0].id
       Bookmark.delete(bookmark_id)
-      expect(Bookmark.all).not to_include(new_bookmark)
+      expect(Bookmark.all).not_to include(new_bookmark)
     end
   end
 end

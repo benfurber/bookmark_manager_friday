@@ -34,7 +34,7 @@ class Bookmark
   end
 
   def self.delete(id)
-    @connection.exec("DELETE FROM bookmarks WHERE id '#{id}'")
+    @connection.exec("DELETE FROM bookmarks WHERE id = '#{id}'")
   end
 
   private
