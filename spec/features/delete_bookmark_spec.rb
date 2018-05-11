@@ -5,7 +5,7 @@ feature 'Deleting a bookmark' do
   scenario 'Delete links visible' do
     bbc_bookmark
     visit '/bookmarks'
-    expect(page).to have_button 'delete'
+    expect(page).to have_button 'Delete'
   end
 
   scenario 'Can click delete link' do

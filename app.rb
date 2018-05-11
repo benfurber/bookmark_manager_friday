@@ -22,6 +22,7 @@ class BookmarkManager < Sinatra::Base
 
   post '/add_to_database' do
     unless Bookmark.add(params[:title_field], params[:url_field])
+
       flash[:message] = 'Error. Link invalid - not added to database.'
     end
 
@@ -31,7 +32,17 @@ class BookmarkManager < Sinatra::Base
   delete '/bookmarks/:id' do
     Bookmark.delete(params[:id])
     flash[:message] = 'Bookmark deleted.'
-    
+
+    redirect '/bookmarks'
+  end
+
+  get '/bookmarks/:id/edit' do
+    @id = params[:id]
+    erb :edit_bookmark
+  end
+
+  put '/bookmarks/:id' do
+    Bookmark.edit(params[:id], params[:title], params[:url])
     redirect '/bookmarks'
   end
 

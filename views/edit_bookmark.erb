@@ -1,0 +1,12 @@
+<h1>Edit bookmark</h1>
+
+<form action='/bookmarks/<%= @id %>' method='post'>
+  <input type='hidden' name='_method' value='PUT'>
+  
+  <label for='title_field'>Edit title<abbr title="This field is mandatory">*</abbr>:</label>
+  <input type='text' name='title_field' id='title_field' required maxlength="50">
+  <br><br>
+  <label for='url_field'>Edit url<abbr title="This field is mandatory">*</abbr>:</label>
+  <input type='text' name='url_field' id='url_field' required maxlength="60">
+  <input type='submit' value='Submit bookmark'>
+</form>
