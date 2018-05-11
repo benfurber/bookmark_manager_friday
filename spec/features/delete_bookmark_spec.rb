@@ -1,18 +1,24 @@
 feature 'Deleting a bookmark' do
-  let(:bbc_link) { 'http://bbc.co.uk' }
-  let(:bbc_name) { 'BBC' }
 
-  scenario 'Delete links visable' do
-    add_bookmarks
+  let(:bbc_bookmark) { add_bbc_bookmark_using_method }
+
+  scenario 'Delete links visible' do
+    bbc_bookmark
     visit '/bookmarks'
-
-    expect(page).to have_content 'delete'
+    expect(page).to have_button 'delete'
   end
 
-  scenario 'Can click delete link and it deletes the bookmark' do
-    new_bookmark = Bookmark.add(bbc_name, bbc_link)
-
+  scenario 'Can click delete link' do
+    bbc_bookmark
     visit '/bookmarks'
-    click_link("delete-#{new_bookmark.id}")
+    click_button("delete-#{bbc_bookmark.id}")
   end
+
+  scenario 'It deletes a bookmark' do
+    bbc_bookmark
+    visit '/bookmarks'
+    click_button("delete-#{bbc_bookmark.id}")
+    expect(page).to have_content 'Bookmark deleted.'
+  end
+
 end

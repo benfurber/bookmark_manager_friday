@@ -5,6 +5,7 @@ require './lib/bookmark.rb'
 class BookmarkManager < Sinatra::Base
   enable :sessions
   register Sinatra::Flash
+  use Rack::MethodOverride
 
   before do
     @bookmarks = Bookmark.all
@@ -24,6 +25,13 @@ class BookmarkManager < Sinatra::Base
       flash[:message] = 'Error. Link invalid - not added to database.'
     end
 
+    redirect '/bookmarks'
+  end
+
+  delete '/bookmarks/:id' do
+    Bookmark.delete(params[:id])
+    flash[:message] = 'Bookmark deleted.'
+    
     redirect '/bookmarks'
   end
 
