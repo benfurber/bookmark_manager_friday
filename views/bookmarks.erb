@@ -11,7 +11,10 @@
 
   <ul>
     <% @bookmarks.each do |bookmark| %>
-      <li><a href="<%= bookmark.url %>"><%= bookmark.title %></a></li>
+      <li>
+        <a href="<%= bookmark.url %>"><%= bookmark.title %></a>
+        (<a href="/delete/<%= bookmark.id %>" id="delete-<%= bookmark.id %>">delete</a>)
+      </li>
     <% end %>
   </ul>
 
