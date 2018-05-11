@@ -49,4 +49,15 @@ describe Bookmark do
       expect(Bookmark.all).not_to include(new_bookmark)
     end
   end
+
+  describe '#edit' do
+    it 'should edit a bookmark' do
+      new_url = 'http://asos.com'
+      new_title = 'asos'
+      new_bookmark = Bookmark.add(bbc_name, bbc_url)
+      bookmark_id = Bookmark.all[0].id
+      edited_bookmark = Bookmark.edit(bookmark_id, new_title, new_url)
+      expect(Bookmark.all).to include(edited_bookmark)
+    end
+  end
 end

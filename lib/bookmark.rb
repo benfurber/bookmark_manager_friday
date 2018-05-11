@@ -37,6 +37,12 @@ class Bookmark
     @connection.exec("DELETE FROM bookmarks WHERE id = '#{id}'")
   end
 
+  def self.edit(id, title, url)
+    return false unless valid_link_check(url)
+    result = @connection.exec("UPDATE bookmarks SET title = '#{title}', url = '#{url}' WHERE id = '#{id}' RETURNING id, url, title")
+    Bookmark.new(result.first['id'], result.first['title'], result.first['url'])
+  end
+
   private
 
   def self.valid_link_check(url)
